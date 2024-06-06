@@ -1,0 +1,33 @@
+<!-- src/app/app.component.html -->
+
+<div class="filter-container">
+  <div>
+    <label for="nameFilter">Name:</label>
+    <select id="nameFilter" [(ngModel)]="nameFilter" (change)="applyFilter()">
+      <option value="">Select Name</option>
+      <option *ngFor="let name of uniqueNames" [value]="name">{{ name }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="ageFilter">Age greater than:</label>
+    <input id="ageFilter" type="number" [(ngModel)]="ageFilter" (input)="applyFilter()">
+  </div>
+  <div>
+    <label for="dateFilter">Date equals:</label>
+    <input id="dateFilter" type="date" [(ngModel)]="dateFilter" (change)="applyFilter()">
+  </div>
+  <div>
+    <label for="valueFilter">Value greater than:</label>
+    <input id="valueFilter" type="number" [(ngModel)]="valueFilter" (input)="applyFilter()">
+  </div>
+  <button (click)="clearFilter()">Clear Filters</button>
+</div>
+
+<ag-grid-angular
+  style="width: 100%; height: 500px;"
+  class="ag-theme-alpine"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="{ sortable: true, filter: true }"
+  (gridReady)="onGridReady($event)">
+</ag-grid-angular>
